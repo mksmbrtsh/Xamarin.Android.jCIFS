@@ -9,7 +9,7 @@
   <!--  <attr path="/api/package[@name='android']/class[@name='Manifest']" name="managedName">NewManifestName</attr>-->
   <attr path="/api/package[@name='jcifs.netbios']/class[@name='Name']" name="name">newName</attr>
 
-<!--// Metadata.xml XPath method reference: path="/api/package[@name='jcifs.smb']/class[@name='Handler']/method[@name='openConnection' and count(parameter)=1 and parameter[1][@type='java.net.URL']]"-->
+  <!--// Metadata.xml XPath method reference: path="/api/package[@name='jcifs.smb']/class[@name='Handler']/method[@name='openConnection' and count(parameter)=1 and parameter[1][@type='java.net.URL']]"-->
   <attr path="/api/package[@name='jcifs.smb']/class[@name='Handler']/method[@name='openConnection']" name="visibility">protected</attr>
 
 <!--// Metadata.xml XPath method reference: path="/api/package[@name='jcifs.util']/class[@name='MD4']/method[@name='engineDigest' and count(parameter)=0]"-->
@@ -23,10 +23,8 @@
 
 <!--// Metadata.xml XPath class reference: path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='lsarpc']"-->
 	<remove-node path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='lsarpc']" />
-
-<!--// Metadata.xml XPath class reference: path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='MsrpcLookupSids']"-->
-	<remove-node path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='MsrpcLookupSids']" />
-
+  
+  <remove-node path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='MsrpcLookupSids']" />
 <!--// Metadata.xml XPath class reference: path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='MsrpcLsarOpenPolicy2']"-->
 	<remove-node path="/api/package[@name='jcifs.dcerpc.msrpc']/class[@name='MsrpcLsarOpenPolicy2']" />
 

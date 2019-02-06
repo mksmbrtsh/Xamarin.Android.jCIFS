@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Jcifs;
 using Jcifs.Smb;
-
+using Jcifs.Netbios;
+using Java.Net;
 namespace samba
 {
 	[Activity (Label = "samba", MainLauncher = true, Icon = "@mipmap/icon")]
@@ -21,22 +22,46 @@ namespace samba
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
 			// Get our button from the layout resource,
 			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-				getFileContents ();
-			};
+			Button button1 = FindViewById<Button> (Resource.Id.myButton);
+            button1.Click += delegate {
+                Button button = FindViewById<Button>(Resource.Id.myButton);
+                Config.RegisterSmbURLHandler();
+                Config.SetProperty("jcifs.smb.client.lport", "8137");
+                Config.SetProperty("jcifs.encoding", "Cp1252");
+                Config.SetProperty("jcifs.smb.lmCompatibility", "0");
+                Config.SetProperty("jcifs.netbios.hostname", "AndroidPhone");
+                getFileContents2();
+                //getFileContents();
+            };
 		}
 
-		// This is NOT best-practice code, just showing a demo Jcifs api call
-		public async Task getFileContents ()
+        // This is NOT best-practice code, just showing a demo Jcifs api call
+        public async Task getFileContents2()
+        {
+            await Task.Run(() => {
+                var lan = new SmbFile("smb://", NtlmPasswordAuthentication.Anonymous);
+               // var workgroups = lan.ListFiles();
+                UniAddress u = UniAddress.GetByName("ALEXEY-PC");
+                Button button = FindViewById<Button>(Resource.Id.myButton);
+                RunOnUiThread(() => {
+                     button.Text = u.ToString();
+                });
+            }
+            ).ContinueWith((Task arg) => {
+                Console.WriteLine(arg.Status);
+                if (arg.Status == TaskStatus.Faulted)
+                    Console.WriteLine(arg.Exception);
+            }
+            );
+        }
+
+        // This is NOT best-practice code, just showing a demo Jcifs api call
+        public async Task getFileContents ()
 		{
 			await Task.Run (() => {
-				var smbStream = new SmbFileInputStream ("smb://guest@10.10.10.5/code/test.txt");
+                var smbStream = new SmbFileInputStream ("smb://user:1@file_server//d.txt");
 				byte[] b = new byte[8192];
 				int n;
 				while ((n = smbStream.Read (b)) > 0) {

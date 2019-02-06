@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.7.0_45-b18 (Oracle Corporation)
+Bundle-Version: 1.3.18
+Bundle-Name: jcifs
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: jcifs
+Export-Package: jcifs, jcifs.dcerpc, jcifs.dcerpc.msrpc, jcifs.http, j
+ cifs.https, jcifs.netbios, jcifs.ntlmssp, jcifs.smb, jcifs.util, jcif
+ s.util.transport
+
